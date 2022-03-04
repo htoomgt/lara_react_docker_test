@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  product_service:
+    image: php:7.4
+    working_dir: /products/
+    volumes:
+      - ./product_service:/products/ 
+    ports:
+      - 8000:8000 
+    command: php -S 0.0.0.0:8000 -t ./
+    networks:
+      - lara_react_dock_test
+  
+  web_frontend:    
+    build: 
+      context: ./web_frontend
+    volumes:
+      - ./web_frontend:/app/   
+      # - /app/node_modules 
+    command: npm start
+    ports:
+      - 3000:3000    
+    networks:
+      - lara_react_dock_test 
+networks:
+  lara_react_dock_test:
