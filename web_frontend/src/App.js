@@ -12,7 +12,7 @@ function App() {
         //   console.log(resp.json)
         //   console.log(resp.body)
         // });
-        const response = await axios.get('http://localhost:8000/products');
+        const response = await axios.get('http://localhost:8000/api/products');
         console.log(response);
         console.log(response.data)
       
