@@ -17,6 +17,12 @@ RUN apk add libzip-dev  && \
 
 RUN apk add libxml2-dev  \
     && docker-php-ext-install xml  
+
+RUN apk --update add --virtual build-dependencies build-base openssl-dev autoconf \
+  && pecl install mongodb \
+  && docker-php-ext-enable mongodb \
+  && apk del build-dependencies build-base openssl-dev autoconf \
+  && rm -rf /var/cache/apk/*
     
 
 RUN curl -sS https://getcomposer.org/installer​ | php -- \
@@ -33,6 +39,14 @@ WORKDIR /app/
 COPY . .
 
 RUN composer install
+
+RUN composer require predis/predis
+
+RUN composer require jenssegers/mongodb 3.8
+
+#changing protocoal of mysql client to tcp
+RUN sed -i 's/\[client-server\]/[client-server] \n protocol=tcp/g' /etc/my.cnf
+
 
 EXPOSE 8000
 

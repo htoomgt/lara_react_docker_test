@@ -21,6 +21,24 @@ services:
     ports:
       - 3000:3000    
     network_mode: bridge
+  
+  cache_service:
+    image: redis:latest
+    command: >
+          --requirepass abcd1234
+    ports:
+      - 6379:6379
+    network_mode: bridge
+
+  no_sql_mongo:
+    image: mongo:latest
+    # restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example  
+    ports:
+      - 27017:27017
+    network_mode: bridge
     # networks:
       # - lara_react_dock_test 
 # networks:
