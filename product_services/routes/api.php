@@ -19,4 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('products', [ProductController::class, 'getAllProducts'])->name('product.get_all');
+
+Route::middleware(['cors'])->group(function () {
+    Route::get('products', [ProductController::class, 'getAllProducts'])->name('product.get_all');
+});
+

@@ -9,9 +9,9 @@ services:
       - ./product_services:/app/ 
     ports:
       - 8000:8000 
-    network_mode: bridge
-    # networks:
-      # - lara_react_dock_test
+    # network_mode: bridge
+    networks:
+      - lara_react_dock_test
   
   web_frontend:    
     build: 
@@ -20,7 +20,9 @@ services:
       - ./web_frontend:/app/   
     ports:
       - 3000:3000    
-    network_mode: bridge
+    # network_mode: bridge
+    networks:
+      - lara_react_dock_test 
   
   cache_service:
     image: redis:latest
@@ -28,7 +30,9 @@ services:
           --requirepass abcd1234
     ports:
       - 6379:6379
-    network_mode: bridge
+    # network_mode: bridge
+    networks:
+      - lara_react_dock_test 
 
   no_sql_mongo:
     image: mongo:latest
@@ -38,10 +42,10 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example  
     ports:
       - 27017:27017
-    network_mode: bridge
-    # networks:
-      # - lara_react_dock_test 
-# networks:
-  # lara_react_dock_test:
+    # network_mode: bridge
+    networks:
+      - lara_react_dock_test 
+networks:
+  lara_react_dock_test:
   
     
