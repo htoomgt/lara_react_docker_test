@@ -40,9 +40,9 @@ COPY . .
 
 RUN composer install
 
-RUN composer require predis/predis
+# RUN composer require predis/predis
 
-RUN composer require jenssegers/mongodb 3.8
+# RUN composer require jenssegers/mongodb 3.8
 
 #changing protocoal of mysql client to tcp
 RUN sed -i 's/\[client-server\]/[client-server] \n protocol=tcp/g' /etc/my.cnf

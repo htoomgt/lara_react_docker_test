@@ -45,8 +45,8 @@ function App() {
     fetchProductHandler();
 }, [fetchProductHandler]);
 
-let productsToShow = products.map((product) => {
-  return <li> {product.name}</li>;
+let productsToShow = products.map((product, index) => {
+  return <li key={index}> {product.name}</li>;
 });
 
   return (
